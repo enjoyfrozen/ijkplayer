@@ -24,6 +24,8 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <iostream>
+#include <memory>
 #include "ijksdl/ijksdl_fourcc.h"
 #include "ijksdl/ijksdl_log.h"
 #include "ijksdl/ijksdl_gles2.h"

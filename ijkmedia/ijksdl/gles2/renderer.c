@@ -34,11 +34,10 @@ static void IJK_GLES2_printProgramInfo(GLuint program)
     }
 
     char    buf_stack[32];
-    char   *buf_heap = NULL;
+    std::unique_ptr<char> buf_heap = std::make_unique<char>(info_len + 1);
     char   *buf      = buf_stack;
     GLsizei buf_len  = sizeof(buf_stack) - 1;
     if (info_len > sizeof(buf_stack)) {
-        buf_heap = (char*) malloc(info_len + 1);
         if (buf_heap) {
             buf     = buf_heap;
             buf_len = info_len;
@@ -48,8 +47,8 @@ static void IJK_GLES2_printProgramInfo(GLuint program)
     glGetProgramInfoLog(program, buf_len, NULL, buf);
     ALOGE("[GLES2][Program] error %s\n", buf);
 
-    if (buf_heap)
-        free(buf_heap);
+    // if (buf_heap)
+    //     free(buf_heap);
 }
 
 void IJK_GLES2_Renderer_reset(IJK_GLES2_Renderer *renderer)
